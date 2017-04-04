@@ -1,110 +1,102 @@
 <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Neuseeland Reise - Etappe 2 (Okains Bay)</title>
+    <link rel="stylesheet" href="../styles.css" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	
+	<style>
+        
+		#Uebersichtskarte {
+        float:right;
+        width: 200px;
+		height: 200px;
+		border: 2px solid pink;
+        }
+    </style>
+	
+</head>
+<body>
 
-	<html>
-
-
-		<head> 
-		<meta charset="UTF-8">
-		<link type="text/css" rel="stylesheet"	href="stylesheet.css"/>
-		<title> KÄSE </title> </head>
-		
-		<body>
-		
-			<h1> Ausgewählte Käsesorten </h1> </p>
-				
-
-			<h2> Cheddar </h2>
- 
-				<a href="https://de.wikipedia.org/wiki/Cheddar_(K%C3%A4se)">
-				<figure role="group">
-				<img 				src="https://www.splendidtable.org/sites/default/files/styles/lede_image/public/470340853.jpg?itok=7acsHkTk" width="800" height="450"/>
-				<figcaption>
-				Ein Stück Cheddar
-				</figcaption>
-				</figure>
-				</a>
-
-			<h2> Emmentaler </h2>
-
-				<a href="https://de.wikipedia.org/wiki/Emmentaler"> 
-				<img 				src="http://www.schweizerkaese.ch/fileadmin/_processed_/csm_content_emmentaler_b8af77161e.jpg" width="800" height="650" />
-				</a>
-
-			<h2> Parmesan </h2>
-
-				<a href="https://de.wikipedia.org/wiki/Parmesan">
-				<figure role="group">
-				<img 				src="http://media1.s-nbcnews.com/i/newscms/2016_07/977756/grated-parmesan-today-tease-160217_f9ef7604016457433d18c10f422ffcde.jpg" width="800" height="450" />
-				<figcaption>
-				Geriebener Parmesan
-				</figcaption>
-				</figure>
-				</a>
-				
-			<h2>  Weitere Käsesorten  </h2>
-			
-			
-			<table>
-			
-				<tr> <!-- Erste Zeile-->
-					
-					<th> Kein Schimmelkäse </th>
-				
-					<th> <a href="https://de.wikipedia.org/wiki/Gouda_(K%C3%A4se)">
-						Gouda
-					</a> </th>	
-					
-					<th> <a href="https://de.wikipedia.org/wiki/Edamer">
-						Edammer	
-					</a> </th>
-				
-					<th> <a href="https://de.wikipedia.org/wiki/Leerdammer">
-						Leerdammer	
-					</a> </th>
-					
-					<th> <a href="https://de.wikipedia.org/wiki/Appenzeller_(K%C3%A4se)">
-						Appenzeller
-					</a> </th>
-				
-				<tr> <!-- Zweite Zeile-->
-					
-					<th> <a href="https://de.wikipedia.org/wiki/Schimmelk%C3%A4se"> Schimmelkäse </a> </th>
-				
-					<th> <a href="https://de.wikipedia.org/wiki/Camembert">
-						Camembert
-					</a> </th>	
-					
-					<th> <a href="https://de.wikipedia.org/wiki/Roquefort_(K%C3%A4se)">
-						Roquefort
-					</a> </th>
-				
-					<th> <a href="https://de.wikipedia.org/wiki/Gorgonzola_(K%C3%A4se)">
-						Gorgonzola	
-					</a> </th>
-					
-					<th> <a href="https://de.wikipedia.org/wiki/Bavaria_blu">
-						Bavaria blu
-					</a> </th>
-					
-			</table>
-			
-			</br></br> <!--"Zweifache" Leerzeile-->
-			
-			<p> You like cheese? </p>
+<h1> Okains Bay </h1> 
 			
 			</br>
 			
-			<div>
+			<div id="Uebersichtskarte"></div>
+			
+			</br>
+			
+			<h2> Natur Pur </h2>
+			
+			<h3> Geographische Länge: -43.710514° </h3>
+			<h3> Geographische Breite: 173.039031° </h3>
+			<h3> Seehöhe: am Meer gelegen </h3>
+			
+			<p class="info"> Okains Bay liegt auf der Halbinsel Banks Peninsula rund 15 Kilometer von Akaora entfernt direkt am Meer. </p>
+			
+			<p class="info"> Die wunderschönen Sandstrände von Okains Bay sind vor allem bei Wassersportlern beliebt. </p>
+			
+			<a href="http://www.kawateafarmstay.co.nz/fastpage/images/okains_bay_large.jpg">
+			
+			<figure role="group">
+				<img src="okainsbay1_.jpg"/>
+				<figcaption>
+				Okains Bay von oben (Quelle: http://www.kawateafarmstay.co.nz/fastpage/images/okains_bay_large.jpg).
+				</figcaption>
+				</figure>
 				
-			For more follow<span> <a href="https://www.instagram.com/hochlandkaese/"> KÄSE</a> </span>on Instagram!
+			</a>	
 			
-			</br></br>
+			</br>
 			
-			<img src="/Users/paultiefenbacher/Documents/Studium/Master/Webmapping/instagram-1675670_1280.png" height= 50; width= 50; margin: auto>
+			<a href="http://mw2.google.com/mw-panoramio/photos/medium/65258581.jpgg">
+				
+			<figure role="group">
+				<img src="okainsbay2_.jpg"/>
+				<figcaption>
+				Der Strand von Okains Bay (Quelle: http://mw2.google.com/mw-panoramio/photos/medium/65258581.jpgg).
+				</figcaption>
+				</figure>	
+				
+			</a>	
 			
-			</div>
+			<h4 class="links"> Quellen </h4> 
 			
+			<ul class="links"> 
+			
+			<li>
+			http://www.kawateafarmstay.co.nz/fastpage/images/okains_bay_large.jpg
+			</li>
+			<li>
+			http://mw2.google.com/mw-panoramio/photos/medium/65258581.jpgg
+			</li>
+			
+			</ul>
 
-		</body>
+			<nav>
+			<a class="previous" href="../01/index.html"/>Etappe 1</a>
+			<span class="current"> Okains Bay </span>
+			<a class="next" href="../03/index.html">Etappe 3</a>
+			</nav>
 
-	</html>
+			<p class="author"> Paul Tiefenbacher, <a href="https://github.com/sh4pefile/sh4pefile.github.io"> https://github.com/sh4pefile/sh4pefile.github.io </a>  </p> 
+			
+<script>
+	
+	var map = L.map("Uebersichtskarte");
+	map.setView([-43.710514,173.039031], 11.5 );
+	
+	var osm = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png");
+	osm.addTo(map);
+	
+	var marker = L.marker([-43.710514,173.039031]);
+	marker.addTo(map);
+	
+	marker.bindPopup("<b>Oakins Bay</b>");
+	
+</script>
+				
+</body>
+</html>
