@@ -68,7 +68,9 @@
 				bmaporthofoto30cm : L.tileLayer('https://{s}.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg', {
                     attribution: '&copy; <a href="https://basemap.at/">Datenquelle: basemap.at</a>',
                     subdomains: ['maps1','maps2','maps3', 'maps4']
-                })
+                }),
+				
+				osm : L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png")
 				
 		};
 		
@@ -84,7 +86,8 @@
 			"basemap.at - GRAU" : layers.bmapgrau,
 			"basemap.at - OVERLAY" : layers.bmapoverlay,
 			"basemap.at - HIGH-DPI" : layers.bmaphidpi,
-			"basemap.at - ORTHOFOTO" : layers.bmaporthofoto30cm
+			"basemap.at - ORTHOFOTO" : layers.bmaporthofoto30cm,
+			"Open Street Map" : layers.osm
 		}).addTo(map);
 		
 		
