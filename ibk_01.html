@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Beispiel Innsbruck 1 (Webcam)</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" /> 
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+
+    <style>
+        h1 {
+            text-align: center;
+        }
+        #ibkMap {
+            width: 900px;
+            height: 600px;
+            border: 1px solid black;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Beispiel Innsbruck 1 (Webcam)</h1>
+	<div id="entfernung" ></div>
+    <div id="ibkMap"></div>
+
+    <script>
+        var map = L.map('ibkMap', {
+            layers : [
+                L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                    subdomains: ['a','b','c']
+                })
+            ],
+            center : [47.208611, 11.460556],
+            zoom : 12
+        });
+		
+        // Marker mit Tooltip und Popup hinzufügen
+		var marker = L.marker([47.208611, 11.460556]);
+		marker.addTo(map);
+		marker.bindTooltip("Webcam Patscherkofel");
+		marker.bindPopup("<h2>Patscherkofel</h2> <img src='https://apps.tirol.gv.at/luft/patscherkofel.jpg' alt='Webcam OEAV Schutzhazus' style='width:230px' /> </br> Webcam OEAV Schutzhazus ");
+		
+
+    </script>
+
+    </body>
+</html>
