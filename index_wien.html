@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Stadtspaziergang Wien (Layer Auswahl)</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" /> 
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="stadtspaziergang_punkte.geojson.js"></script>
+	<script src="citybike_standorte.json.js"></script>
+	<script src="stadtwanderwege.json.js"></script>
+	
+    <style>
+        h1 {
+            text-align: center;
+        }
+        #wienMap {
+            width: 900px;
+            height: 600px;
+            border: 1px solid black;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stadtspaziergang Wien (Layer Auswahl)</h1>
+
+    <div id="wienMap"></div>
+
+    <script>
+        console.log(window.spaziergang_punkte);	
+		console.log(window.citybike_standorte);	
+		console.log(window.stadtwanderwege);	
+		
+	
+        // WMTS-Layer definieren - Quelle: http://www.basemap.at/wmts/1.0.0/WMTSCapabilities.xml
+			
+        var layers = {
+            geolandbasemap : L.tileLayer("https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png", {
+                subdomains : ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+                attribution : 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
+            }),
+            bmapgrau : L.tileLayer("https://{s}.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{y}/{x}.png", {
+                subdomains : ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+                attribution : 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
+            }),
+            bmapoverlay : L.tileLayer("https://{s}.wien.gv.at/basemap/bmapoverlay/normal/google3857/{z}/{y}/{x}.png", {
+                subdomains : ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+                attribution : 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
+            }),
+            bmaphidpi : L.tileLayer("https://{s}.wien.gv.at/basemap/bmaphidpi/normal/google3857/{z}/{y}/{x}.jpeg", {
+                subdomains : ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+                attribution : 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
+            }),
+            bmaporthofoto30cm : L.tileLayer("https://{s}.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg", {
+                subdomains : ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
+                attribution : 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
+            }),
+            osm : L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                subdomains: ['a','b','c'],
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            })
+        };
+
+        // Karte definieren und Ausschnitt setzen
+        var map = L.map('wienMap', {
+            layers : [layers.bmapgrau],
+            center : [48.20833, 16.373064],
+            zoom : 12
+        });
+
+        // Maßstab hinzufügen
+        L.control.scale({
+            maxWidth : 200,
+            metric : true,
+            imperial : false
+        }).addTo(map);
+		
+		//Stadtspaziergang Punkte visualisieren
+	    var punkte = L.geoJSON(window.spaziergang_punkte, {
+        }).bindPopup(function (layer) {
+        return layer.feature.properties.NAME;
+        }).addTo(map);
+		
+		//Citybike Standorte visualisieren
+	    var bikepunkte = L.geoJSON(window.citybike_standorte, {
+        }).bindPopup(function (layer) {
+        return layer.feature.properties.STATION;
+        }).addTo(map);
+		
+		//Stadtwanderwege visualisieren
+	    var stadtwanderwege = L.geoJSON(window.stadtwanderwege, {
+		style: function (feature) {
+		var farbe = "";
+		if (feature.properties.TYP == "1") {
+		
+			farbe = "red";
+		
+			} else {
+			
+			farbe = "purple";
+			
+			}
+			
+				return {color: farbe};
+			}
+        }).bindPopup(function (layer) {
+		var popup = "<h3>" + layer.feature.properties.BEZ_TEXT + "</h3>";
+		popup += "<a href='" + layer.feature.properties.URL_INFO + "'> Infos </a>";
+        return popup
+        }).addTo(map);
+
+        // WMTS-Layer Auswahl und Marker Auswahl Overlay hinzufügen
+        L.control.layers({
+            "basemap.at - STANDARD" : layers.geolandbasemap,
+            "basemap.at - GRAU": layers.bmapgrau,
+            "basemap.at - OVERLAY" : layers.bmapoverlay,
+            "basemap.at - HIGH-DPI" : layers.bmaphidpi,
+            "basemap.at - ORTHOFOTO" : layers.bmaporthofoto30cm,
+            "OpenStreetMap" : layers.osm
+		},{
+		   "Stadtspaziergang Standorte" : punkte,
+		   "Citybike Standorte" : bikepunkte,
+		   "Stadtwanderwege" : stadtwanderwege
+        }).addTo(map)
+		
+
+    </script>
+
+</body>
+</html>
