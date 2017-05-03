@@ -206,10 +206,15 @@
             "Citybike Standorte": punkteCitybike,
             "Wandern in und um Wien": linienWanderwege,
 			"Märkte" : maerkteflaechen,
-        }).addTo(map)
+        }).addTo(map);
 
         // Ausschnitt setzen
         // DONE: Ausschnitt auf Stationen des Stadtpaziergangs setzen
+		
+		map.locate({
+		setView: true
+		});
+		
     </script>
 
 </body>
