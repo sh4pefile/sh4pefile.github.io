@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		
     <title>Wien</title>
 
@@ -16,13 +17,17 @@
             text-align: center;
         }
 
-        #wienMap {
-            width: 900px;
-            height: 600px;
-            border: 1px solid black;
-            margin: auto;
-        }
+	    body {
+	       	 	padding: 0;
+	      	  	margin: 0;
+	   		}
+	   			html, body, #wienMap {
+	   			height: 100vh;
+	   			width: 100vw;
+	   		}
+
     </style>
+	
 </head>
 
 <body>
@@ -88,7 +93,6 @@
         }).addTo(map);
 
 		var hash = new L.Hash(map);
-		
         
     </script>
 
