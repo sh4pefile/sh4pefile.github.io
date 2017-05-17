@@ -11,8 +11,9 @@
 		    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 	
 			<script src="leaflet_hash.js"></script>
-			<link rel="stylesheet" href="leaflet-routing-machine.css" />
 			<script src="leaflet-routing-machine.js"></script>
+			<link rel="stylesheet" href="leaflet-routing-machine.css" />
+			
 
 		    <style>
 		        h1 {
@@ -97,9 +98,9 @@
 				var hash = new L.Hash(map);
 				L.Routing.control({
 				waypoints: [
-					L.latLng(47.268674, 11.393514),
-					L.latLng(48.208564, 16.373822)
-				]
+								L.latLng(47.268674, 11.393514),
+								L.latLng(48.208564, 16.373822)
+						]
 				}).addTo(map);
 		
 		    </script>
