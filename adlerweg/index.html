@@ -84,6 +84,18 @@
         // leaflet-hash aktivieren
         var hash = new L.Hash(map);
 		L.geoJSON(window.etappeO6).addTo(map);
+		//Icon von mapicons.mapsmarker.com herunterladen
+		var huts = [
+					L.marker([47.030306, 12.548986], {title:"Steiner Alm", icon: L.icon ({iconUrl: 'icons/hut.png'}) }),  				//Steiner Alm 			47.030306, 12.548986
+					L.marker([47.049335, 12.576691], {title:"Sudetendeutsche Hütte", icon: L.icon ({iconUrl: 'icons/hut.png'}) }),  	//Sudetendeutsche Hütte 	47.049335, 12.576691
+					];
+		
+		var hutsLayer = L.featureGroup();
+		for (var i=0; i<huts.length; i++) {
+			hutsLayer.addLayer(huts[i]);
+		}
+		hutsLayer.addTo(map);
+		
 		
     </script>
 
