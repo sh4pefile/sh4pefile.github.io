@@ -11,9 +11,10 @@
 	<link rel="stylesheet" href="js/leaflet-elevation/leaflet.elevation-0.0.4.css"/>
     <script src="js/leaflet/leaflet.js"></script>
     <script src="js/leaflet-hash/leaflet_hash.js"></script>
+	<script src="data/adlerwegetappeO6.js"></script>
 	<script src="js/leaflet-elevation/leaflet.elevation-0.0.4.min.js"></script>
 	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-	<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+	
 
     <style>
         body {
@@ -85,16 +86,11 @@
 
         // leaflet-hash aktivieren
         var hash = new L.Hash(map);
-		
-		omnivore.gpx('data/AdlerwegEtappeO6.gpx').addTo(map);
-		
 		var el = L.control.elevation();
 		el.addTo(map);
 		L.geoJSON(window.etappeO6, {
 			 onEachFeature: el.addData.bind(el)
 		}).addTo(map);
-		
-	
 		//Icon von mapicons.mapsmarker.com herunterladen
 		var huts = [
 					L.marker([47.030306, 12.548986], {title:"Steiner Alm", icon: L.icon ({iconUrl: 'icons/hut.png'}) }),  				//Steiner Alm 			47.030306, 12.548986
