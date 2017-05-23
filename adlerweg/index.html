@@ -165,8 +165,8 @@
 		
 		//Icon von mapicons.mapsmarker.com herunterladen
 		var huts = [
-					L.marker([47.030306, 12.548986], {title:"Steiner Alm", icon: L.icon ({iconUrl: 'icons/hut.png'}) }),  				//Steiner Alm 			47.030306, 12.548986
-					L.marker([47.049335, 12.576691], {title:"Sudetendeutsche Hütte", icon: L.icon ({iconUrl: 'icons/hut.png'}) }),  	//Sudetendeutsche Hütte 	47.049335, 12.576691
+					L.marker([47.030306, 12.548986], {title:"Steiner Alm", icon: L.icon ({iconUrl: 'icons/hut.png', iconAnchor:[15, 30]}) }),  					//Steiner Alm 			47.030306, 12.548986
+					L.marker([47.049335, 12.576691], {title:"Sudetendeutsche Hütte", icon: L.icon ({iconUrl: 'icons/hut.png', iconAnchor:[15, 30]}) }),  					//Sudetendeutsche Hütte 	47.049335, 12.576691
 					];
 		
 		var hutsLayer = L.featureGroup();
@@ -183,8 +183,8 @@
 		});
 		
 		var StartZiel = [
-							L.marker([47.01048879589804, 12.539693778463448], {title:"Start", icon: L.icon ({iconUrl: 'icons/start.png'}) }), //Start
-							L.marker([47.04933874772476, 12.576509786193457], {title:"Ziel", icon: L.icon ({iconUrl: 'icons/finish.png'}) }), //Zeil
+							L.marker([47.01048879589804, 12.539693778463448], {title:"Start", icon: L.icon ({iconUrl: 'icons/start.png', iconAnchor:[15, 30]}) }), 							//Start
+							L.marker([47.04933874772476, 12.576509786193457], {title:"Ziel", icon: L.icon ({iconUrl: 'icons/finish.png', iconAnchor:[15, 30]}) }), 							//Zeil
 		];
 		
 		var StartZielLayer = L.featureGroup();
