@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 	
     <title>Etappe O6: Matrei in Osttirol - Sudetendeutsche Hütte</title>
 
@@ -150,41 +149,29 @@
 
         // leaflet-hash aktivieren
         var hash = new L.Hash(map);
+
+	//Icon von mapicons.mapsmarker.com herunterladen
+	var huts = [
+			L.marker([47.030306, 12.548986], {title:"Steiner Alm", icon: L.icon ({iconUrl: 'icons/hut.png', iconAnchor:[14, 30]}) }),  					//Steiner Alm 			47.030306, 12.548986
+			L.marker([47.049335, 12.576691], {title:"Sudetendeutsche Hütte", icon: L.icon ({iconUrl: 'icons/hut.png', iconAnchor:[14, 30]}) }),  					//Sudetendeutsche Hütte 	47.049335, 12.576691
+		];
 		
-		
-		/*
-		// Höhenprofil
-		var el = L.control.elevation();
-		el.addTo(map);
-		
-		L.geoJSON(window.etappeO6, {
-			 onEachFeature: el.addData.bind(el)
-		}).addTo(map);
-		*/
-		
-		
-		//Icon von mapicons.mapsmarker.com herunterladen
-		var huts = [
-					L.marker([47.030306, 12.548986], {title:"Steiner Alm", icon: L.icon ({iconUrl: 'icons/hut.png', iconAnchor:[14, 30]}) }),  					//Steiner Alm 			47.030306, 12.548986
-					L.marker([47.049335, 12.576691], {title:"Sudetendeutsche Hütte", icon: L.icon ({iconUrl: 'icons/hut.png', iconAnchor:[14, 30]}) }),  					//Sudetendeutsche Hütte 	47.049335, 12.576691
-					];
-		
-		var hutsLayer = L.featureGroup();
-		for (var i=0; i<huts.length; i++) {
-			hutsLayer.addLayer(huts[i]);
-		}
-		// hutsLayer.addTo(map);
-		map.on("zoomend", function() {
-			if (map.getZoom() >= 13) {
-				map.addLayer(hutsLayer);
-			} else {
-				map.removeLayer(hutsLayer);
-				}
-		});
-		
-		var StartZiel = [
-							L.marker([47.01048879589804, 12.539693778463448], {title:"Start", icon: L.icon ({iconUrl: 'icons/start.png', iconAnchor:[14, 30]}) }), 							//Start
-							L.marker([47.04933874772476, 12.576509786193457], {title:"Ziel", icon: L.icon ({iconUrl: 'icons/finish.png', iconAnchor:[14, 30]}) }), 							//Zeil
+	var hutsLayer = L.featureGroup();
+	for (var i=0; i<huts.length; i++) {
+		hutsLayer.addLayer(huts[i]);
+	}
+	// hutsLayer.addTo(map);
+	map.on("zoomend", function() {
+		if (map.getZoom() >= 13) {
+			map.addLayer(hutsLayer);
+		} else {
+			map.removeLayer(hutsLayer);
+			}
+	});
+	
+	var StartZiel = [
+				L.marker([47.01048879589804, 12.539693778463448], {title:"Start", icon: L.icon ({iconUrl: 'icons/start.png', iconAnchor:[14, 30]}) }), 							//Start
+				L.marker([47.04933874772476, 12.576509786193457], {title:"Ziel", icon: L.icon ({iconUrl: 'icons/finish.png', iconAnchor:[14, 30]}) }), 							//Zeil
 		];
 		
 		var StartZielLayer = L.featureGroup();
