@@ -15,15 +15,24 @@
 	<script src="js/leaflet-elevation/leaflet.elevation-0.0.4.min.js"></script>
 	<script src="js/leaflet-omnivore/leaflet-omnivore.js"></script>
 	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script src="./etappeninfo.js"></script>
+	<script src="./map.js"></script>
 	
 
     <style>
         body {
+			text-align: center;
             padding: 0px;
             margin: 0px;
 			background-color: #BDBDBD;
 			opacity: 0.9;
         }
+		
+		div {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
 		
         html, body, #map {
             height: 100vh;
@@ -34,24 +43,15 @@
             text-align: center;
 			font-family: arial;
         }
-		
-		p {
-			color: green;
-			text-align: justify;
-			font-family: georgia;
-			font-size: 14px;
-			margin: 20px;
-		}
 	
 		#map {
             width: 1024px;
             height: 600px;
             border: 3px solid green;
-			margin-left: 15px ;
         }
 		
 		#etappen {
-			margin-left: 15px;
+			align: center;
 		}
 		
     </style>
@@ -98,223 +98,12 @@
 	<option value="AdlerwegEtappeO8.gpx">Adlerweg EtappeO8</option>
 	<option value="AdlerwegEtappeO9.gpx">Adlerweg EtappeO9</option>
 	</select>
-
-    <script>
-        // WMTS-Layer basemap.at - Quelle: http://www.basemap.at/wmts/1.0.0/WMTSCapabilities.xml
-        var layers = {
-            geolandbasemap: L.tileLayer("https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            bmapgrau: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{y}/{x}.png", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            bmapoverlay: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapoverlay/normal/google3857/{z}/{y}/{x}.png", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            bmaphidpi: L.tileLayer("https://{s}.wien.gv.at/basemap/bmaphidpi/normal/google3857/{z}/{y}/{x}.jpeg", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            bmaporthofoto30cm: L.tileLayer("https://{s}.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg", {
-                subdomains: ['maps', 'maps1', 'maps2', 'maps3', 'maps4'],
-                attribution: 'Datenquelle: <a href="http://www.basemap.at/">basemap.at</a>'
-            }),
-            osm: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                subdomains: ['a', 'b', 'c'],
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            })
-        };
-
-        // Karte definieren
-        var map = L.map('map', {
-            layers: [layers.geolandbasemap],
-            center : [47.049282, 12.577037],
-            zoom : 11
-        });
-
-        // Maßstab hinzufügen
-        L.control.scale({
-            maxWidth: 200,
-            metric: true,
-            imperial: false
-        }).addTo(map);
-
-		// Höhenprofil control hinzufügen
-        var profileControl = L.control.elevation({
-            position : 'bottomright',
-            theme : 'purple-theme'
-        });
-        profileControl.addTo(map);
-
-		function loadTrack(track) {
-		
-					// GPX Track laden
-					gpxEtappeO6 = omnivore.gpx('data/'+track).addTo(map);
-
-					// nach erfolgreichem Laden Popup hinzufügen, Ausschnitt setzen und Höhenprofil erzeugen
-					gpxEtappeO6.on('ready', function () {
-						// Popup hinzufügen
-						var markup = '<h3> Adlerweg-Etappe O6: Matrei in Osttirol - Sudetendeutsche Hütte </h3>';
-						markup += '<p>Ausgehend vom Matreier Tauernhaus verläuft diese Etappe am Osttiroler Adlerweg bis zur Sudetendeutschen Hütte.</p>'
-						markup += '<li>Ausgangspunkt: Matreier Tauernhaus</li>';
-						markup += '<li>Endpunkt: Sudetendeutsche Hütte</li>';
-						markup += '<li>Höhenmeter bergauf: 1250</li>';
-						markup += '<li>Höhenmeter bergab: 100</li>';
-						markup += '<li>Höchster Punkt: 2656</li>';
-						markup += '<li>Schwierigkeitsgrad: mittelschwierig</li>';
-						markup += '<li>Streckenlänge (in km): 8</li>';
-						markup += '<li>Gehzeit (in Stunden): 4</li>';
-						markup += '<li>Einkehrmöglichkeiten: Steiner Alm & Sudetendeutsche Hütte</li>';
-						markup += '<li><a href="http://www.tirol.at/reisefuehrer/sport/wandern/wandertouren/a-adlerweg-etappe-o6-matrei-in-osttirol-sudetendeutsche-huette">Weitere Informationen</a></li>';
-						gpxEtappeO6.bindPopup(markup, { maxWidth : 450 });
-
-						// Ausschnitt setzen
-						map.fitBounds(gpxEtappeO6.getBounds());
-
-						// Höhenprofil erzeugen
-						profileControl.clear();
-						gpxEtappeO6.eachLayer(function(layer) {
-							profileControl.addData(layer.feature);
-				
-			
-				
-						//var pts =
-						//console.log(layer.feature.geometry.coordinates)
-						var pts = layer.feature.geometry.coordinates;
-						
-						for (var i=1; i < pts.length; i += 1) {		//i ++ geht eins nach vorne; i += x geht x nach vorne
-						//console.log(pts[i]);	//aktueller Punkt
-						//console.log(pts[i-1]);	//vorheriger Punkt
-						
-						//Entfernung bestimmen
-						var dist = map.distance(
-							[ pts [i][1],pts[i][0] ],
-							[ pts [i-1][1],pts[i-1][0] ]
-						).toFixed(0);
-						//console.log(dist);
-						
-						var delta = pts [i][2] - pts [i-1][2];
-						console.log(delta, "Höhenmeter auf", dist,"m Strecke");
-						
-						var rad = Math.atan(delta/dist);
-						var deg = (rad*(180/Math.PI)).toFixed(1);
-						//console.log(deg);
-						
-						//var rot = ["#ab2524", "#a02128", "#a1232b", "#8d1d2c", "#701f29", "#5e2028"];
-						//var gruen = ["#42EB00", "#38C400", "#288F00", "#195700", "#0A2400"];
-						//colorbrewer2.org
-						
-						//rot http://colorbrewer2.org/?type=sequential&scheme=YlOrRd&n=6
-						//['#ffffb2','#fed976','#feb24c','#fd8d3c','#f03b20','#bd0026']
-						
-						//grün http://colorbrewer2.org/?type=sequential&scheme=BuGn&n=6
-						//['#edf8fb','#ccece6','#99d8c9','#66c2a4','#2ca25f','#006d2c']
-						
-						var farbe;
-						switch(true) { // checks if condition is true, not for certain values of a variable
-						case (deg >= 20) :  farbe = "#bd0026"; break;
-						case (deg >= 15) :  farbe = "#f03b20"; break;
-						case (deg >= 10) :  farbe = "#fd8d3c"; break;
-						case (deg >= 5) :  farbe = "#feb24c"; break;
-						case (deg >= 1) :  farbe = "#fed976"; break;
-						case (deg >= -1) :  farbe = "yellow"; break;
-						case (deg >= -5) :  farbe = "#d9f0a3"; break;
-						case (deg >=-10) :  farbe = "#addd8e"; break;
-						case (deg >=-15) :  farbe = "#78c679"; break;
-						case (deg >= -20) :  farbe = "#31a354"; break;
-						case (deg < -20) :  farbe = "#006837"; break;
-						}
-						//console.log(deg,farbe);
-						
-						//Linie zeichnen
-						var pointA = new L.LatLng(pts [i][1],pts[i][0]);
-						var pointB = new L.LatLng(pts [i-1][1],pts[i-1][0]);
-						var pointList = [pointA, pointB];
-		   
-						var firstpolyline = new L.Polyline(pointList, {
-							color: farbe,
-							weight: 6,
-							opacity: 1,
-							smoothFactor: 1
-
-						});
-			
-				firstpolyline.addTo(map);
-						
-						};
-					});
-				});
-				
-		};		
-
-        // WMTS-Layer Auswahl hinzufügen
-        var layerControl = L.control.layers({
-            "basemap.at - STANDARD": layers.geolandbasemap,
-            "basemap.at - GRAU": layers.bmapgrau,
-            "basemap.at - OVERLAY": layers.bmapoverlay,
-            "basemap.at - HIGH-DPI": layers.bmaphidpi,
-            "basemap.at - ORTHOFOTO": layers.bmaporthofoto30cm,
-            "OpenStreetMap": layers.osm,
-        },{
-            //"Adlerweg Etappe O6" : gpxTrack
-        }).addTo(map);
-		
-		//zwischen einzelnen Etappen wählen
-		var etappenSelektor = document.getElementById("etappen");
-		//console.log("Selector", etappenSelektor);
-		etappenSelektor.onchange = function(evt) {
-		console.log("Change event:", evt);
-		console.log("GPX Track laden: ", etappenSelektor[etappenSelektor.selectedIndex].value);
-		loadTrack(etappenSelektor[etappenSelektor.selectedIndex].value);
-		}
-
-        // leaflet-hash aktivieren
-        var hash = new L.Hash(map);
-
-		//Icon von mapicons.mapsmarker.com herunterladen
-		var huts = [
-				L.marker([47.030306, 12.548986], {title:"Steiner Alm", icon: L.icon ({iconUrl: 'icons/hut.png', iconAnchor:[14, 30]}) }),  					//Steiner Alm 			47.030306, 12.548986
-				L.marker([47.049335, 12.576691], {title:"Sudetendeutsche Hütte", icon: L.icon ({iconUrl: 'icons/hut.png', iconAnchor:[14, 30]}) }),  					//Sudetendeutsche Hütte 	47.049335, 12.576691
-			];
-			
-		var hutsLayer = L.featureGroup();
-		for (var i=0; i<huts.length; i++) {
-			hutsLayer.addLayer(huts[i]);
-		}
-		// hutsLayer.addTo(map);
-		map.on("zoomend", function() {
-			if (map.getZoom() >= 13) {
-				map.addLayer(hutsLayer);
-			} else {
-				map.removeLayer(hutsLayer);
-				}
-		});
 	
-		var StartZiel = [
-					L.marker([47.01048879589804, 12.539693778463448], {title:"Start", icon: L.icon ({iconUrl: 'icons/start.png', iconAnchor:[14, 30]}) }), 							//Start
-					L.marker([47.04933874772476, 12.576509786193457], {title:"Ziel", icon: L.icon ({iconUrl: 'icons/finish.png', iconAnchor:[14, 30]}) }), 							//Zeil
-			];
-		
-		var StartZielLayer = L.featureGroup();
-		for (var i=0; i<StartZiel.length; i++) {
-			StartZielLayer.addLayer(StartZiel[i]);
-		}
-		// hutsLayer.addTo(map);
-		map.on("zoomend", function() {
-			if (map.getZoom() >= 13) {
-				map.addLayer(StartZielLayer);
-			} else {
-				map.removeLayer(StartZielLayer);
-				}
-		});
-		
-    </script>
-	
-	<p> Ausgehend vom Matreier Tauernhaus verläuft diese Etappe am Osttiroler Adlerweg bis zur Sudetendeutschen Hütte. Auf der Route gilt es ziemlich viele kraftraubende Höhenmeter zu absolvieren, die Mühen werden mit faszinierenden Ausblicken auf die Lasörlinggruppe belohnt. Am besten startet man diese Etappe beim Parkplatz im Weiler Glanz, dann spart man sich zwei Stunden Anmarsch. Von Matrei in Osttirol kann man mit dem PKW (Taxidienst auf Anfrage) in 20 Minuten dorthin gelangen. All jene, die auch diesen ersten Streckenabschnitt zu Fuß bewältigen wollen, gelangen über den wenig befahrenen Fahrweg von Matrei über Hinterburg zum Parkplatz. Vom Parkplatz in Glanz kommt man in 1 ½  bis 2 Stunden zur Äußeren Steiner Alm und in weiteren 2 bis 2 ½ Stunden zur Sudetendeutschen Hütte. Der Steig führt großteils durch einen Wald mit uralten Lärchen, vorbei an der Köfler-Almhütte (Privatalm). Im Bereich der Ranzeralm quert man zweimal den Fahrweg. Etwas oberhalb der Lackner-Almhütte beginnt ein Karrenweg, der an einer Quelle vorbeiführt, ehe er von Osten nach Westen die Edelweißwiese durchzieht. Wer nicht durch den Wald wandern möchte, kann auch vom Parkplatz Glanz entlang der Forststraße bis zum Beginn der Edelweißwiese gehen. Nach einer Felskante fällt der durch ein Geländer geschützte Steig in den lichten Lärchenwald leicht ab. Über den Steinerbach gelangt man zu den Almhütten der Äußeren Steiner Alm (1.914 Meter), von der Äußeren Steiner Alm geht es in der flachen Trogtalsohle nordöstlich weiter in Richtung Talschluss. Kleine Lärchenhaine und gewaltige Grünschieferblöcke prägen diesen romantischen Wegabschnitt. Am Ende des Talschlusses führt eine Materialseilbahn zur Sudetendeutschen Hütte, hier befand sich früher eine Förderstätte des Eisenerz-Bergbaus, deshalb wird der Talwinkel als „Schmelzhütte“ bezeichnet. Der Steig zur Sudetendeutschen Hütte führt zuerst nah am Steinerbach hinauf, dann windet er sich in Kehren über die Wiesenhänge empor, wobei man den Nussingkogel zur linken und die Bretterwandspitze zur rechten Seite hat. Schließlich wird das Gelände mit seinen von den Gletschern geformten Kuppen etwas flacher und schon befindet man sich im Nahbereich der geräumigen Sudetendeutschen Hütte (2.650 Meter) inmitten der Granatspitzgruppe. (<a href="http://www.tirol.at/reisefuehrer/sport/wandern/wandertouren/a-adlerweg-etappe-o6-matrei-in-osttirol-sudetendeutsche-huette">Weitere Informationen</a>) </p>
-		
+	<h4>Kurztext</h4>
+	<div id="Kurztext"></div>
+	<h4>Streckenbeschreibung</h4>
+	<div id="Streckenbeschreibung"></div>
+			
 		<a href=https://github.com/sh4pefile/sh4pefile.github.io> Autor: P. Tiefenbacher </a>
 			
 </body>
