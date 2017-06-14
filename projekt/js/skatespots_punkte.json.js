@@ -217,7 +217,7 @@ window.skatespotMarker={
             "OBJECTID": 13,
             "KATEGORIE": 2,
             "NAME": "Landhausplatz",
-			"TYP": "Öffentlicher Platz",
+			"TYP": "Öffentlicher Raum",
             "BEMERKUNG": "Der mit Abstand bekannteste Skatespot Innsbrucks. Viele Trannys, gutes Flat, Sitzbänke teils als Curbs fahrbar.",
 			"FOTO": "<img src= images/SpotsUse/Skate_LHP4.jpg />",
             "SE_ANNO_CAD_DATA": null
